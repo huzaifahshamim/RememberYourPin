@@ -1,7 +1,6 @@
 hashTable = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
 
 
-
 # recrusive function
 # base case: is when reached end of pin, print out word
 # recursive case:
@@ -9,16 +8,17 @@ hashTable = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
 
 def printWordsUtil(master_list, number, curr, output, pin_len):
     if curr == pin_len:
-        #print("DONE WORD")
+        # print("DONE WORD")
         word = "".join(output)
         print(word)
+        master_list.append(word)
         return
 
     # Try all 3 possible characters
     # for current digir in number[]
     # and recur for remaining digits
     for i in range(len(hashTable[number[curr]])):
-        #print(output)
+        # print(output)
         output.append(hashTable[number[curr]][i])
         printWordsUtil(master_list, number, curr + 1, output, pin_len)
         output.pop()
