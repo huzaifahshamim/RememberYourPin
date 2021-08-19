@@ -1,3 +1,5 @@
+from english_words import english_words_set
+
 hashTable = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
 
 
@@ -10,7 +12,7 @@ def printWordsUtil(master_list, number, curr, output, pin_len):
     if curr == pin_len:
         # print("DONE WORD")
         word = "".join(output)
-        print(word)
+        # print(word)
         master_list.append(word)
         return
 
@@ -24,13 +26,27 @@ def printWordsUtil(master_list, number, curr, output, pin_len):
         output.pop()
 
 
-def printWords(pin):
+def printWords(a_pin):
     master_list = []
-    number = [int(num) for num in str(pin)]
+    number = [int(num) for num in str(a_pin)]
     pin_len = len(number)
     printWordsUtil(master_list, number, 0, [], pin_len)
-    print(master_list)
+    return master_list
 
 
-pin = 234
-printWords(pin)
+def realWords(list_words):
+    real_words = []
+    for word in list_words:
+        #print(word)
+        if (word in english_words_set) is True:
+            print(word)
+            real_words.append(word)
+    print("True Words Are")
+    print(real_words)
+
+
+pin = 4566
+all_possible_words = printWords(pin)
+print(all_possible_words)
+
+realWords(all_possible_words)
