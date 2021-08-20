@@ -1,5 +1,8 @@
 import functools
+from markov_chain import call_markov
+
 hashTable = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+
 
 def right_word(pin_and_letters, a_word):
     pin_iter = pin_and_letters[0]
@@ -14,3 +17,7 @@ def right_word(pin_and_letters, a_word):
 def filter_out_list(pin_iter, number, all_words):
     func = functools.partial(right_word, [pin_iter, hashTable[number]])
     return list(filter(func, all_words))
+
+
+markov_dict = call_markov()
+print(markov_dict)

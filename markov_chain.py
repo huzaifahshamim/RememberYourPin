@@ -1,7 +1,7 @@
-# keep 63% of pins for 4 digit pin
-import functools
+import json
 
 hashTable = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+
 
 def read_txt(file):
     list_words = []
@@ -14,7 +14,7 @@ def read_txt(file):
     return list_words
 
 
-def construct_markov_chain(word_list, char_count):
+def construct_markov_chain(word_list, char_count=2):
     markov_chain = {}
     for word in word_list:
         if len(word) <= char_count:
@@ -31,11 +31,20 @@ def construct_markov_chain(word_list, char_count):
     return markov_chain
 
 
-all_words = read_txt("all_words.txt")
-print(all_words)
-mark_chain = construct_markov_chain(all_words, 2)
-print(mark_chain)
+def save_markov(markov_chain_dict):
+    markov_file = open("markov_dict.json", "w")
+    json.dump(markov_chain_dict, markov_file)
+    markov_file.close()
 
+
+def call_markov():
+    markov_file = open("markov_dict.json", "r")
+    return markov_file
+
+
+all_words = read_txt("all_words.txt")
+mark_chain = construct_markov_chain(all_words, 2)
+save_markov(mark_chain)
 
 # print(word_list)
 # print(len(word_list))
