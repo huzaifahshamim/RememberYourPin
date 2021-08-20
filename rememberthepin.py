@@ -8,7 +8,7 @@ hashTable = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
 # recursive case:
 
 
-def printWordsUtil(master_list, number, curr, output, pin_len):
+def printWordsUtil(master_list, og_pin, str_pin, curr, output, pin_len=2):
     if curr == pin_len:
         # print("DONE WORD")
         word = "".join(output)
@@ -19,10 +19,10 @@ def printWordsUtil(master_list, number, curr, output, pin_len):
     # Try all 3 possible characters
     # for current digir in number[]
     # and recur for remaining digits
-    for i in range(len(hashTable[number[curr]])):
+    for i in range(len(hashTable[str_pin[curr]])):
         # print(output)
-        output.append(hashTable[number[curr]][i])
-        printWordsUtil(master_list, number, curr + 1, output, pin_len)
+        output.append(hashTable[str_pin[curr]][i])
+        printWordsUtil(master_list, og_pin, str_pin, curr + 1, output, pin_len)
         output.pop()
 
 
@@ -30,14 +30,14 @@ def printWords(a_pin):
     master_list = []
     number = [int(num) for num in str(a_pin)]
     pin_len = len(number)
-    printWordsUtil(master_list, number, 0, [], pin_len)
+    printWordsUtil(master_list, a_pin, number, 0, [])
     return master_list
 
 
 def realWords(list_words):
     real_words = []
     for word in list_words:
-        #print(word)
+        # print(word)
         if (word in english_words_set) is True:
             print(word)
             real_words.append(word)
@@ -45,7 +45,7 @@ def realWords(list_words):
     print(real_words)
 
 
-pin = 4566
+pin = input("Please enter your Pin: ")
 all_possible_words = printWords(pin)
 print(all_possible_words)
 

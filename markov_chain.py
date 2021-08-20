@@ -3,7 +3,6 @@ import functools
 
 hashTable = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
 
-
 def read_txt(file):
     list_words = []
     file1 = open(file, 'r')
@@ -12,6 +11,7 @@ def read_txt(file):
         if not word:
             break
         list_words.append(word.strip())
+    return list_words
 
 
 def construct_markov_chain(word_list, char_count):
@@ -32,25 +32,10 @@ def construct_markov_chain(word_list, char_count):
 
 
 all_words = read_txt("all_words.txt")
+print(all_words)
+mark_chain = construct_markov_chain(all_words, 2)
+print(mark_chain)
 
-
-def right_word(pin_and_letters, a_word):
-    pin_iter = pin_and_letters[0]
-    letters = pin_and_letters[1]
-    mod_aword = a_word[pin_iter:]
-    if any(mod_aword.startswith(letter) for letter in letters):
-        return True
-    else:
-        return False
-
-
-def filter_out_list(pin_iter, number, all_words):
-    func = functools.partial(right_word, [pin_iter, hashTable[number]])
-    return list(filter(func, all_words))
-
-
-word_list = []
-read_txt("all_words.txt", word_list)
 
 # print(word_list)
 # print(len(word_list))
