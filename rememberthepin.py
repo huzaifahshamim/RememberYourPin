@@ -8,12 +8,12 @@ hashTable = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
 # recursive case:
 
 
-def printWordsUtil(master_list, og_pin, str_pin, curr, output, pin_len=2):
+def printWordsUtil(final_list, og_pin, str_pin, curr, output, pin_len=2):
     if curr == pin_len:
         # print("DONE WORD")
         word = "".join(output)
         # print(word)
-        master_list.append(word)
+        final_list.append(word)
         return
 
     # Try all 3 possible characters
@@ -22,11 +22,16 @@ def printWordsUtil(master_list, og_pin, str_pin, curr, output, pin_len=2):
     for i in range(len(hashTable[str_pin[curr]])):
         # print(output)
         output.append(hashTable[str_pin[curr]][i])
-        printWordsUtil(master_list, og_pin, str_pin, curr + 1, output, pin_len)
+        printWordsUtil(final_list, og_pin, str_pin, curr + 1, output, pin_len)
         output.pop()
 
 
 def printWords(a_pin):
+    """
+    Used to call recursive function printWordsUtil
+    :param a_pin: x-digit pin of NUMBERS only
+    :return: list of Some english, some gibberish words.
+    """
     master_list = []
     number = [int(num) for num in str(a_pin)]
     pin_len = len(number)
@@ -35,6 +40,11 @@ def printWords(a_pin):
 
 
 def realWords(list_words):
+    """
+    Given a list of words, figures out which ones are real english words.
+    :param list_words: Some english, some gibberish words.
+    :return: A list of english words.
+    """
     real_words = []
     for word in list_words:
         # print(word)
@@ -45,8 +55,8 @@ def realWords(list_words):
     print(real_words)
 
 
-pin = input("Please enter your Pin: ")
-all_possible_words = printWords(pin)
-print(all_possible_words)
+#pin = input("Please enter your Pin: ")
+#all_possible_words = printWords(pin)
+#print(all_possible_words)
 
-realWords(all_possible_words)
+#realWords(all_possible_words)

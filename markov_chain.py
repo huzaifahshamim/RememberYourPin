@@ -39,7 +39,8 @@ def save_markov(markov_chain_dict):
 
 def call_markov():
     markov_file = open("markov_dict.json", "r")
-    return markov_file
+    markov_dict = json.load(markov_file)
+    return markov_dict
 
 
 all_words = read_txt("all_words.txt")
